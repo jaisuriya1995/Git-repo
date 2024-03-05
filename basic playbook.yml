@@ -1,0 +1,16 @@
+- hosts: ubuntu
+  remote_user: ec2-user
+  become: yes
+  tasks:
+  - name: install latest version of apache
+    yum:
+     name: httpd
+     state: present
+  - name: start service httpd
+    service:
+     name: httpd
+     state: started
+  - name: copy index file to dest
+    copy:
+     src: /home/ec2-user/index.html
+     dest: /var/www/html/
